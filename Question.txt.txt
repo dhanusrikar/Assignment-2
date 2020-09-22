@@ -1,0 +1,31 @@
+Question 1: Linear Regression
+In this problem, we will implement least squares linear regression to predict density of wine based on its acidity. Recall that the error metric for least squares is given by
+Where all the symbols are as discussed in class. The files “linearX.csv” and “linearY.csv” contain the acidity of the wine (x(i) ’s, x(i) ∈ R) and its density (y(i) ’s, y(i) ∈ R), respectively, with one training example per row. We will implement least squares linear regression to learn the relationship between x(i)’s and y(i)’s. Normalize the dataset before using it.
+
+(a) Implement batch gradient descent method for optimizing J(θ). Choose an appropriate learning rate and the stopping criteria (as a function of the change in the value of J(θ)). You can initialize the parameters as θ = V(0) (the vector of all zeros). Do not forget to include the intercept term. Report your learning rate, stopping criteria and the final set of parameters obtained by your algorithm.
+
+(b) Implement the same as discussed in (a) with adaptive learning rate. In this case, you are supposed to set learning rate η = η’/( √t), where t is the iteration number. Report your initial learning rate, stopping criteria and the final set of parameters obtained by your algorithm. How does it vary from part (a)? Comment on the results obtained.
+
+(c) Plot the data on a two-dimensional graph and plot the hypothesis function learned by your algorithm in the previous part.
+
+(d) Draw a 3-dimensional mesh showing the error function (J(θ)) on z-axis and the parameters in the x − y plane. Display the error value using the current set of parameters at each iteration of the gradient descent. Include a time gap of 0.2 seconds in your display for each iteration so that the change in the function value can be observed by the human eye.
+
+(e) Repeat the part above for drawing the contours of the error function at each iteration of the gradient descent. Once again, chose a time gap of 0.2 sec so that the change be perceived by the human eye (Note here plot will be 2-D).
+
+(f) Repeat the part above (i.e. draw the contours at each learning iteration) for the step size values of η = {0.001, 0.025, 0.1}. What do you observe? Comment.
+
+Question 2: Sampling and Stochastic Gradient Descent
+In this problem, we will introduce the idea of sampling by adding Gaussian noise to the prediction of a hypothesis and generate synthetic training data. Consider a given hypothesis hθ (i.e. known θ0, θ1, θ2) for a data point x = [x0, x1, x2]T. Note that x0 = 1 is the intercept term.
+Adding Gaussian noise, equation becomes
+Where, ε ∼ N (0, σ2)
+To gain deeper understanding behind Stochastic Gradient Descent (SGD), we will use the SGD algorithm to learn the original hypothesis from the data generated using sampling, for varying batch sizes. We will implement the version where we make a complete pass through the data in a round robin fashion (after initially shuffling the examples). If there are r examples in each batch, then there is a total of m/r batches assuming m training examples. For the batch number b (1 ≤ b ≤ m/r), the set of examples is given as: {x (1) , x(2) , . · · · , x(k),· · · , x(r)}
+Where k = (b − 1)r + k.
+
+The Loss function computed over these r examples is given as:
+(a) Sample 1 million data points taking values of θ = [θ0, θ1, θ2]T = [3 1 2]T, and x1 ∼ N (3, 4) and x2 ∼ N (−1, 4) independently, and noise variance in y is given by, σ2 = 2.
+
+(b) Implement Stochastic gradient descent method for optimizing J(θ). Relearn θ using sampled data points of part (a) keeping everything same except the batch size. Keep η = 0.001 and initialize ∀j θj = 0. Report the θ learned each time separately for values of batch size r = {1, 100, 10000, 1000000}. Carefully decide your convergence criteria in each case.
+
+(c) Do different algorithms in the part above (for varying values of r) converge to the same parameter values? How much different are these from the parameters of the original hypothesis from which the data was generated? Comment on the relative speed of convergence and also on number of iterations in each case. Next, for each of learned models above, report the error on a new test data of 10,000 samples provided in the file named “q2test.csv”. Note that this test set was generated using the same sampling procedure as described in part (a) above. Also, compute the test error with respect to the prediction of the original hypothesis, and compare with the error obtained using learned hypothesis in each case. Comment.
+
+(d) In the 3-dimensional parameter space (θj on each axis), plot the movement of θ as the parameters are updated (until convergence) for varying batch sizes. How does the (shape of) movement compare in each case? Does it make intuitive sense? Argue.
